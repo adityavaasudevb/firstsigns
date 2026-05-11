@@ -1,15 +1,19 @@
 import streamlit as st
 import cv2
-import mediapipe as mp
 import tempfile
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.ensemble import IsolationForest
+try:
+    from mediapipe.python.solutions import face_mesh as mp_face_mesh
+    from mediapipe.python.solutions import hands as mp_hands
+except ImportError:
+    import mediapipe as mp
+
+    mp_face_mesh = mp.solutions.face_mesh
+    mp_hands = mp.solutions.hands
 
 from utils.storage import add_session, get_sessions
-
-mp_face_mesh = mp.solutions.face_mesh
-mp_hands = mp.solutions.hands
 
 st.set_page_config(page_title="FirstSigns", layout="centered")
 st.title("FirstSigns - Multi-Session Screening")
